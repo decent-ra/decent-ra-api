@@ -1,5 +1,9 @@
 # Decent Enclave Application Framework
 
+## NOTE
+
+We've noticed a change in the latest version of the build tool and a staled 3rd party library may cause the build process to fail. We're working on updating the dependency, and the fix will be released shortly.
+
 ## Requirements
 - Check compatibility of computer's hardware. 
   - Some computer doesn't have or support the SGX hardware. If the computer doesn't support, try to use the simulation mode to develop the program.
