@@ -99,6 +99,12 @@ if(CMAKE_COMPILER_IS_CLANG)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wmissing-declarations -Wmissing-prototypes -Wdocumentation -Wno-documentation-deprecated-sync -Wunreachable-code")
 endif(CMAKE_COMPILER_IS_CLANG)
 
+if(UNSAFE_BUILD)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-error")
+    set(CMAKE_C_FLAGS_ASAN "${CMAKE_C_FLAGS_ASAN} -Wno-error")
+    set(CMAKE_C_FLAGS_ASANDBG "${CMAKE_C_FLAGS_ASANDBG} -Wno-error")
+endif(UNSAFE_BUILD)
+
 if(WIN32)
     set(libs ${libs} ws2_32)
 endif(WIN32)
@@ -233,7 +239,7 @@ endif(USE_STATIC_MBEDTLS_LIBRARY)
 
 if(USE_SHARED_MBEDTLS_LIBRARY)
     add_library(mbedcrypto SHARED ${src_crypto})
-    set_target_properties(mbedcrypto PROPERTIES VERSION 2.16.0 SOVERSION 3)
+    set_target_properties(mbedcrypto PROPERTIES VERSION 2.16.7 SOVERSION 3)
     target_include_directories(mbedcrypto INTERFACE
         $<BUILD_INTERFACE:${mbedtls_INCLUDE_DIRS}>
         $<INSTALL_INTERFACE:include/mbedtls>
@@ -241,7 +247,7 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
     target_link_libraries(mbedcrypto ${libs})
 
     add_library(mbedx509 SHARED ${src_x509})
-    set_target_properties(mbedx509 PROPERTIES VERSION 2.16.0 SOVERSION 0)
+    set_target_properties(mbedx509 PROPERTIES VERSION 2.16.7 SOVERSION 0)
     target_include_directories(mbedx509 INTERFACE
         $<BUILD_INTERFACE:${mbedtls_INCLUDE_DIRS}>
         $<INSTALL_INTERFACE:include/mbedtls>
@@ -249,7 +255,7 @@ if(USE_SHARED_MBEDTLS_LIBRARY)
     target_link_libraries(mbedx509 ${libs} mbedcrypto)
 
     add_library(mbedtls SHARED ${src_tls})
-    set_target_properties(mbedtls PROPERTIES VERSION 2.16.0 SOVERSION 12)
+    set_target_properties(mbedtls PROPERTIES VERSION 2.16.7 SOVERSION 12)
     target_include_directories(mbedtls INTERFACE
         $<BUILD_INTERFACE:${mbedtls_INCLUDE_DIRS}>
         $<INSTALL_INTERFACE:include/mbedtls>
