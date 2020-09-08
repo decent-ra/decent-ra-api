@@ -16,6 +16,7 @@
 	- [CMake(https://cmake.org/download/)](https://cmake.org/download/)
 - Python 3.7 or higher
 - Microsoft Visual Studio 2019 (community version or higher) (*not* Visual Studio Code)
+- Make sure the system environmental variable `SGXSDKInstallPath` (on Windows) is set, otherwise, CMake will not be able to find the path to the SGX SDK
 
 ## Build & Run
 
